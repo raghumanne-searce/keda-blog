@@ -1,0 +1,1 @@
+Workload Identity IAM binding has to be added to the service account of keda-scaler deployment in keda namespace which keda-oprator.
