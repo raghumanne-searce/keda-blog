@@ -2,8 +2,7 @@ Installing KEDA through Helm:
 ```shell
 helm repo add kedacore https://kedacore.github.io/charts
 helm repo update
-kubectl create namespace keda
-helm install keda kedacore/keda --namespace abc --create-namespace
+helm install keda kedacore/keda --namespace keda --create-namespace
 ```
 
 Setting up Authentication with Workload Identity:
