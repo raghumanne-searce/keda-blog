@@ -33,8 +33,8 @@ Setting up Authentication with Workload Identity:
     ```
 * Creating Pub Sub Topic and Subscription
     ```shell
-    SUBSCRIPTION_NAME=mysubscription
-    TOPIC_NAME=mytopic
+    SUBSCRIPTION_NAME=keda-test-subscription
+    TOPIC_NAME=keda-test-topic
 
     gcloud beta pubsub topics create $TOPIC_NAME
     gcloud beta pubsub subscriptions create $SUBSCRIPTION_NAME \

@@ -1,10 +1,10 @@
-#This script is to consume the message from the topic
+import os
 from google.cloud import pubsub_v1
 
-# Prompt user to enter project ID, topic name, and subscription name
-project_id = input("Enter your project ID: ")
-topic_name = input("Enter the name of the topic: ")
-subscription_name = input("Enter the name of the subscription: ")
+# Read project ID, topic name, and subscription name from environment variables
+project_id = os.environ.get('PROJECT_ID')
+topic_name = os.environ.get('TOPIC_NAME')
+subscription_name = os.environ.get('SUBSCRIPTION_NAME')
 
 # Set up Pub/Sub subscriber client and subscription path
 subscriber = pubsub_v1.SubscriberClient()

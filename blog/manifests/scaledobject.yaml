@@ -1,13 +1,13 @@
 apiVersion: keda.sh/v1alpha1
 kind: ScaledObject
 metadata:
-  name: pubsub-scaledobject
+  name: pubsub-test
 spec:
   scaleTargetRef:
-    name: nginx #Target Workload Name
+    name: consume-pubsub-messages #Target Workload Name
   triggers:
   - type: gcp-pubsub
     authenticationRef:
-      name: pubsub
+      name: pubsub-test
     metadata:
-      subscriptionName: "subs_name" # Required
+      subscriptionName: "keda-test-subscription" # Required

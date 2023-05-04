@@ -1,22 +1,24 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: nginx
+  name: consume-pubsub-messages
 spec:
+  replicas: 1
   selector:
     matchLabels:
-      app: nginx
+      app: consume-pubsub-messages
   template:
     metadata:
       labels:
-        app: nginx
+        app: consume-pubsub-messages
     spec:
       containers:
-      - name: nginx
-        image: nginx:latest
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
-        ports:
-        - containerPort: 80
+      - name: consume-pubsub-messages
+        image: raghumanne/keda:pubsub
+        env:
+          - name: PROJECT_ID
+            value: test
+          - name: TOPIC_NAME
+            value: keda-test-topic
+          - name: SUBSCRIPTION_NAME
+            value: keda-test-subscription
