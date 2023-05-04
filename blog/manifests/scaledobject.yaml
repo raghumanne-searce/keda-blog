@@ -1,0 +1,13 @@
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: pubsub-scaledobject
+spec:
+  scaleTargetRef:
+    name: nginx #Target Workload Name
+  triggers:
+  - type: gcp-pubsub
+    authenticationRef:
+      name: pubsub
+    metadata:
+      subscriptionName: "subs_name" # Required
