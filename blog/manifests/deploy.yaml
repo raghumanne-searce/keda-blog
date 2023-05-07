@@ -13,7 +13,7 @@ spec:
       name: pubsub-test
     metadata:
       subscriptionName: "keda-test-subscription" # Required
-
+---
 #TriggerAuthentication
 apiVersion: keda.sh/v1alpha1
 kind: TriggerAuthentication
@@ -23,7 +23,7 @@ metadata:
 spec:
   podIdentity:
     provider: gcp
-
+---
 #Deployment
 apiVersion: apps/v1
 kind: Deployment
