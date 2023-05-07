@@ -23,7 +23,11 @@ Setting up Authentication with Workload Identity:
 
     gcloud projects add-iam-policy-binding $PROJECT_ID \
     --member serviceAccount:$SERVICE_ACCOUNT_FULL_NAME \
-    --role roles/monitoring.viewer --role roles/pubsub.subscriber
+    --role roles/monitoring.viewer
+
+    gcloud projects add-iam-policy-binding $PROJECT_ID \
+    --member serviceAccount:$SERVICE_ACCOUNT_FULL_NAME \
+    --role roles/pubsub.subscriber
     ```
 * Binding GCP IAM Service Account and k8s service account 
     ```shell
@@ -38,7 +42,13 @@ Setting up Authentication with Workload Identity:
 
 
     #Access to consume pubsub messages from GKE Workloads
-    kubectl annotate serviceaccount default  --namespace default iam.gke.io/gcp-service-account=$SERVICE_ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com
+    gcloud iam service-accounts add-iam-policy-binding $SERVICE_ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com \
+    --role roles/iam.workloadIdentityUser \
+    --member "serviceAccount:$PROJECT_ID.svc.id.goog[default/default]"
+
+    kubectl annotate serviceaccount default  \
+    --namespace default \
+    iam.gke.io/gcp-service-account=$SERVICE_ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com
     ```
 Creating Pub Sub Topic and Subscription
 ```shell
