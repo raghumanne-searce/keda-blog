@@ -33,7 +33,6 @@ Setting up Authentication with Workload Identity:
     ```shell
      gcloud iam service-accounts add-iam-policy-binding $SERVICE_ACCOUNT_NAME@$PROJECT_ID.iam.gserviceaccount.com \
     --role roles/iam.workloadIdentityUser \
-    --member "serviceAccount:$PROJECT_ID.svc.id.goog[keda/keda-operator]" \
     --member "serviceAccount:$PROJECT_ID.svc.id.goog[default/default]"
 
     kubectl annotate serviceaccount keda-operator \
