@@ -1,0 +1,52 @@
+#ScaledObject
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: pubsub-test
+  namespace: default
+spec:
+  scaleTargetRef:
+    name: consume-pubsub-messages #Target Workload Name
+  triggers:
+  - type: gcp-pubsub
+    authenticationRef:
+      name: pubsub-test
+    metadata:
+      subscriptionName: "keda-test-subscription" # Required
+---
+#TriggerAuthentication
+apiVersion: keda.sh/v1alpha1
+kind: TriggerAuthentication
+metadata:
+  name: pubsub-test
+  namespace: default
+spec:
+  podIdentity:
+    provider: gcp
+---
+#Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: consume-pubsub-messages
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: consume-pubsub-messages
+  template:
+    metadata:
+      labels:
+        app: consume-pubsub-messages
+    spec:
+      containers:
+      - name: consume-pubsub-messages
+        image: raghumanne/keda:pubsub
+        env:
+          - name: PROJECT_ID
+            value: PROJECT_ID
+          - name: TOPIC_NAME
+            value: keda-test-topic
+          - name: SUBSCRIPTION_NAME
+            value: keda-test-subscription
