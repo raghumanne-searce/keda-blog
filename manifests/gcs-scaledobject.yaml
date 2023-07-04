@@ -1,0 +1,15 @@
+#ScaledObject
+apiVersion: keda.sh/v1alpha1
+kind: ScaledObject
+metadata:
+  name: gcs-test
+  namespace: default
+spec:
+  scaleTargetRef:
+    name: consume-pubsub-messages #Target Workload Name
+  triggers:
+  - type: gcp-storage
+    metadata:
+      bucketname: keda-test
+      targetObjectCount: '100'
+      maxBucketItemsToScan: '1000'
