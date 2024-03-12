@@ -1,6 +1,6 @@
 Creating GKE Cluster with Workload Identity enabled:
 ```shell
-gcloud container clusters create demo-cluster --workload-pool=$PROJECT_ID.svc.id.goog --workload-metadata=GKE_METADATA --machine-type=e2-medium --max-nodes=2 --zone us-central1-a
+gcloud container clusters create keda-demo-cluster --workload-pool=$PROJECT_ID.svc.id.goog --workload-metadata=GKE_METADATA --machine-type=e2-medium --max-nodes=2 --zone us-central1-a
 ```
 
 Installing KEDA through Helm:
